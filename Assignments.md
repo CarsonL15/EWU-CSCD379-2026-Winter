@@ -2,55 +2,55 @@
 
 1. [Assignment 1](Assignment1.md)
    - 100 points +5 EC points
-   - Assigned: 4/2
-   - Initial work complete: 4/7 11:59 pm
+   - Assigned: 1/6
+   - Initial work complete: 1/12 11:59 pm
      - 50% for running pipeline with passing unit test
      - 50% for working website
-   - Code Reviews Due by: 4/09 11:59 pm
-   - Review in class: 4/11 2:00 pm
-   - Final turn-in: 4/11 11:59 pm
+   - Code Reviews Due by: 1/13 11:59 pm
+   - Review in class: 1/15 2:00 pm
+   - Final turn-in: 1/15 11:59 pm
 1. [Assignment 2](Assignment2.md)
    - 100 points +5 EC points
-   - Assigned: 4/11
-   - Initial work complete: 4/21 11:59 pm
+   - Assigned: 1/15
+   - Initial work complete: 1/25 11:59 pm
      - 50% for running pipeline with passing unit test
      - 50% for working website
-   - Code Reviews Due by: 4/23 11:59 pm
-   - Review in class: 4/25 2:00 pm
-   - Final turn-in: 4/25 11:59 pm
+   - Code Reviews Due by: 1/27 11:59 pm
+   - Review in class: 1/29 2:00 pm
+   - Final turn-in: 1/29 11:59 pm
 1. [Assignment 3](Assignment3.md)
    - 100 points +5 EC points
-   - Assigned: 4/25
-   - Initial work complete: 5/5 11:59 pm
+   - Assigned: 1/29
+   - Initial work complete: 2/8 11:59 pm
      - 50% for running pipeline with passing unit test
      - 50% for working website
-   - Code Reviews Due by: 5/7 11:59 pm
-   - Review in class: 5/09 2:00 pm
-   - Final turn-in: 5/09 11:59 pm
+   - Code Reviews Due by: 2/10 11:59 pm
+   - Review in class: 2/12 2:00 pm
+   - Final turn-in: 2/12 11:59 pm
 1. [Assignment 4](Assignment4.md)
    - 100 points +5 EC points
-   - Assigned: 5/09
-   - Initial work complete: 5/19 11:59 pm
+   - Assigned: 2/12
+   - Initial work complete: 2/22 11:59 pm
      - 50% for running pipeline with passing unit test
      - 50% for working website
-   - Code Reviews Due by: 5/21 11:59 pm
-   - Review in class: 5/23 2:00 pm
-   - Final turn-in: 5/23 11:59 pm
+   - Code Reviews Due by: 2/24 11:59 pm
+   - Review in class: 2/26 2:00 pm
+   - Final turn-in: 2/26 11:59 pm
 1. [Assignment 5](Assignment5.md)
    - 100 points +5 EC points
-   - Assigned: 5/23
-   - Initial work complete: 6/2 11:59 pm
+   - Assigned: 2/26
+   - Initial work complete: 3/8 11:59 pm
      - 50% for running pipeline with passing unit test
      - 50% for working website
-   - Code Reviews Due by: 6/4 11:59 pm
-   - Review in class: 6/6 2:00 pm
-   - Final turn-in: 6/6 11:59 pm
+   - Code Reviews Due by: 3/10 11:59 pm
+   - Review in class: 3/12 2:00 pm
+   - Final turn-in: 3/12 11:59 pm
 1. [Final Project](Final.md)
    - 50 points +50 EC points
-   - Assigned: 4/2
-   - In-class hackathon 6/6
+   - Assigned: 1/6
+   - In-class hackathon 3/12
    - Final project presentations finals week
-   - 3:30 pm on Thursday, 6/13/2024
+   - 3:30 pm on Thursday, 3/19/2026
 
 If you are having trouble viewing the below graph, copy the code and paste it [in this editor](https://mermaid-js.github.io/docs/mermaid-live-editor-beta)
 
@@ -59,27 +59,27 @@ gantt
     title Assignments Timeline
     dateFormat  YYYY-MM-DD
     section Assignment1
-    Assigned :A1, 2024-04-02, 2024-04-07
-    Code Review :A1-CR, 2024-04-07, 2024-04-09
-    Final Changes :A1-FC, 2024-04-09, 2024-04-11
+    Assigned :A1, 2026-01-06, 2026-01-12
+    Code Review :A1-CR, 2026-01-12, 2026-01-13
+    Final Changes :A1-FC, 2026-01-13, 2026-01-15
     section Assignment2
-    Assigned :A2, 2024-04-11, 2024-04-21
-    Code Review :A2-CR, 2024-04-21, 2024-04-23
-    Final Changes :A2-FC, 2024-04-23, 2024-04-25
+    Assigned :A2, 2026-01-15, 2026-01-25
+    Code Review :A2-CR, 2026-01-25, 2026-01-27
+    Final Changes :A2-FC, 2026-01-27, 2026-01-29
     section Assignment3
-    Assigned :A3, 2024-04-25, 2024-05-05
-    Code Review :A3-CR, 2024-05-05, 2024-05-07
-    Final Changes :A3-FC, 2024-05-07, 2024-05-09
+    Assigned :A3, 2026-01-29, 2026-02-08
+    Code Review :A3-CR, 2026-02-08, 2026-02-10
+    Final Changes :A3-FC, 2026-02-10, 2026-02-12
     section Assignment4
-    Assigned :A4, 2024-05-09, 2024-05-19
-    Code Review :A4-CR, 2024-05-19, 2024-05-21
-    Final Changes :A4-FC, 2024-05-21, 2024-05-23
+    Assigned :A4, 2026-02-12, 2026-02-22
+    Code Review :A4-CR, 2026-02-22, 2026-02-24
+    Final Changes :A4-FC, 2026-02-24, 2026-02-26
     section Assignment5
-    Assigned :A5, 2024-05-23, 2024-06-02
-    Code Review :A5-CR, 2024-06-02, 2024-06-04
-    Final Changes :A5-FC, 2024-06-04, 2024-06-06
+    Assigned :A5, 2026-02-26, 2026-03-08
+    Code Review :A5-CR, 2026-03-08, 2026-03-10
+    Final Changes :A5-FC, 2026-03-10, 2026-03-12
     section Final
-    Final Project :F, 2024-06-06, 2024-06-13
+    Final Project :F, 2026-03-12, 2026-03-19
 
 ```
 
@@ -108,7 +108,7 @@ gantt
   - A link to your deployed website & API page
 - Your git diff in YOUR PR in YOUR repo (not the PR against the class repo) should only show changes relevant to the assignment criteria, any changes outside of that will cause you to lose points for messy code
   - We know the repo against the class will be messy, and that code will not be reviewed. The PR in your repo is the one that will be reviewed
-- Here is an example! https://github.com/IntelliTect-Samples/EWU-CSCD379-2024-Spring/pull/70
+- Here is an example! https://github.com/IntelliTect-Samples/EWU-CSCD379-2024-Spring/pull/9
 
 ### PR Reviews:
 

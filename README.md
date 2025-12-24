@@ -1,5 +1,6 @@
 ## Instructors ##
 [Grant Erickson](https://github.com/GrantErickson) and [Meg Woodford](https://github.com/mmwoodfo)
+[Benjamin Michaelis](https://github.com/BenjaminMichaelis)
 For general questions, we suggest asking in Teams so that others can help as well. We encourage people to work together and collaborate. Please feel free to help your fellow students out. Though it is possible to privately message people directly, as much as possible, we encourage open discussion on the main chat so that others can benefit as well.
 You can also send an e-mail to: [EWU-Instructors@IntelliTect.com](EWU-Instructors@IntelliTect.com) for final grade or general questions.
 
@@ -83,4 +84,4 @@ The coursework will be cross-platform. However, in class the instructors will be
 - Pull the repo again and see if the unmodified version works
 
 ### Azure Issues
-If you are having issues gettig Azure setup correctly and everything working, please check out this document: https://github.com/IntelliTect-Samples/EWU-CSCD379-2024-Spring/blob/main/SettingUpAzure.md
+If you are having issues gettig Azure setup correctly and everything working, please check out this document: https://github.com/IntelliTect-Samples/EWU-CSCD379-2026-Winter/blob/main/SettingUpAzure.md
