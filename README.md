@@ -1,3 +1,15 @@
+## Deployment
+
+**Azure URL**: [YOUR_AZURE_URL_HERE]
+
+## Extra Credit Ideas
+
+1. **Daily Challenge Mode** - A mode where all players get the same word each day, with a leaderboard showing who solved it in the fewest guesses.
+2. **Multiplayer Head-to-Head** - Real-time competitive mode where two players race to solve the same word first.
+3. **Custom Word Lists** - Allow users to create and share themed word lists (e.g., programming terms, movie titles, sports teams).
+
+---
+
 ## Instructors ##
 [Grant Erickson](https://github.com/GrantErickson), [Meg Gravatt](https://github.com/mmwoodfo), and [Benjamin Michaelis](https://github.com/BenjaminMichaelis)
 
