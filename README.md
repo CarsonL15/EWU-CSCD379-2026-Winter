@@ -1,12 +1,12 @@
 ## Deployment
 
-**Azure URL**: [YOUR_AZURE_URL_HERE]
+**Azure URL**: https://icy-wave-03d88090f.4.azurestaticapps.net
 
 ## Extra Credit Ideas
 
 1. **Daily Challenge Mode** - A mode where all players get the same word each day, with a leaderboard showing who solved it in the fewest guesses.
-2. **Multiplayer Head-to-Head** - Real-time competitive mode where two players race to solve the same word first.
-3. **Custom Word Lists** - Allow users to create and share themed word lists (e.g., programming terms, movie titles, sports teams).
+2. **Multiplayer 1v1** - Real time competitive mode where two players race to solve the same word first.
+3. **Custom Word Lists** - Allow users to create and share themed word lists.
 
 ---
 
