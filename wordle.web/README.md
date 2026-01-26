@@ -4,7 +4,7 @@ A Wordle-inspired word guessing game built with Nuxt 4, Vue 3, Vuetify 3, and Ty
 
 ## Live Demo
 
-**Azure URL:** https://icy-wave-03d88090f.4.azurestaticapps.net/
+**Azure URL:** https://icy-wave-03d88090f.4.azurestaticapps.net
 
 ## Features
 
