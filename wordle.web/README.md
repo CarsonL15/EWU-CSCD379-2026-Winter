@@ -1,23 +1,28 @@
-# Nuxt Minimal Starter
+# Word Wizardry
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+A Wordle-inspired word guessing game built with Nuxt 4, Vue 3, Vuetify 3, and TypeScript.
+
+## Live Demo
+
+**Azure URL:** https://icy-wave-03d88090f.4.azurestaticapps.net/
+
+## Features
+
+- Daily word of the day mode
+- Random word mode for unlimited play
+- Two word lists (common words for answers, extended list for valid guesses)
+- Hint generator
+- Statistics tracking (wins, losses, streaks, average guesses)
+- Word definitions displayed on win
+- Dark/light mode with custom color themes
+- Responsive design for mobile and desktop
 
 ## Setup
 
 Make sure to install dependencies:
 
 ```bash
-# npm
 npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
 ```
 
 ## Development Server
@@ -25,17 +30,7 @@ bun install
 Start the development server on `http://localhost:3000`:
 
 ```bash
-# npm
 npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
 ```
 
 ## Production
@@ -43,33 +38,31 @@ bun run dev
 Build the application for production:
 
 ```bash
-# npm
 npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
 ```
 
-Locally preview production build:
+Generate static site:
 
 ```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
+npm run generate
 ```
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+## Testing
+
+Run unit tests:
+
+```bash
+npm run test
+```
+
+## Technologies
+
+- [Nuxt 4](https://nuxt.com/)
+- [Vue 3](https://vuejs.org/)
+- [Vuetify 3](https://vuetifyjs.com/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Vitest](https://vitest.dev/)
+
+## Deployment
+
+This project is deployed to Azure Static Web Apps via GitHub Actions CI/CD pipeline.
