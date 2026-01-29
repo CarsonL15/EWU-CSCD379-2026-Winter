@@ -25,7 +25,7 @@ Develop a game that doesn't already exist using your abilities augmented with AI
 
 ## Requirements
 
-**1. Create a client-side Nuxt game ** ❌✅
+**1. Create a client-side Nuxt game** ❌✅
 - Is unique and not searchable on the internet  ❌✅
 - Has at least 3 pages that require navigation go get between ❌✅
 - Clear start, middle, and end (win/loss) ❌✅
