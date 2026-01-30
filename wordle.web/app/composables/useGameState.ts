@@ -19,6 +19,7 @@ export interface WordOfDayState {
 const STATS_KEY = 'wordle-stats'
 const WOTD_KEY = 'wordle-wotd'
 const PLAYED_WORDS_KEY = 'wordle-played-words'
+const MAX_PLAYED_WORDS = 100 // Limit stored words to prevent localStorage bloat
 
 export function useGameState() {
   // Get today's date string
@@ -112,8 +113,8 @@ export function useGameState() {
     const played = getPlayedWords()
     if (!played.includes(word.toLowerCase())) {
       played.push(word.toLowerCase())
-      // Keep only last 100 words to prevent storage bloat
-      if (played.length > 100) {
+      // Keep only last MAX_PLAYED_WORDS to prevent storage bloat
+      if (played.length > MAX_PLAYED_WORDS) {
         played.shift()
       }
       localStorage.setItem(PLAYED_WORDS_KEY, JSON.stringify(played))

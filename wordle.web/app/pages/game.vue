@@ -240,6 +240,16 @@ const triggerShake = () => {
   }, 500)
 }
 
+// Extracted shared reset logic per code review feedback
+const resetBoard = () => {
+  guesses.value = initializeGuesses()
+  currentRow.value = 0
+  currentCol.value = 0
+  gameOver.value = false
+  message.value = ''
+  keyStates.value = {}
+}
+
 const checkDailyCompleted = () => {
   const wotdState = loadWordOfDayState()
   dailyCompleted.value = !!(wotdState && wotdState.completed)
@@ -259,37 +269,24 @@ const playWordOfDay = () => {
   // If already completed, show the completed state
   if (wotdState && wotdState.completed) {
     targetWord.value = wotdState.word
-    guesses.value = initializeGuesses()
-    currentRow.value = 0
-    currentCol.value = 0
+    resetBoard()
     gameOver.value = true
     message.value = wotdState.won
       ? "You already completed today's word!"
       : `Today's word was ${wotdState.word}`
     messageType.value = wotdState.won ? 'success' : 'info'
-    keyStates.value = {}
     dailyCompleted.value = true
     return
   }
 
   targetWord.value = getWordOfDay()
-  guesses.value = initializeGuesses()
-  currentRow.value = 0
-  currentCol.value = 0
-  gameOver.value = false
-  message.value = ''
-  keyStates.value = {}
+  resetBoard()
   gameMode.value = 'daily'
 }
 
 const startRandomGame = () => {
   targetWord.value = getRandomWord()
-  guesses.value = initializeGuesses()
-  currentRow.value = 0
-  currentCol.value = 0
-  gameOver.value = false
-  message.value = ''
-  keyStates.value = {}
+  resetBoard()
   gameMode.value = 'random'
   checkDailyCompleted()
 }
