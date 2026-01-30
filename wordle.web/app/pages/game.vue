@@ -250,6 +250,39 @@ const resetBoard = () => {
   keyStates.value = {}
 }
 
+// Audio context for key click sounds (Extra Credit)
+let audioContext: AudioContext | null = null
+
+const playKeySound = () => {
+  try {
+    if (!audioContext) {
+      audioContext = new (window.AudioContext || (window as any).webkitAudioContext)()
+    }
+
+    // Resume audio context if suspended (browser autoplay policy)
+    if (audioContext.state === 'suspended') {
+      audioContext.resume()
+    }
+
+    const oscillator = audioContext.createOscillator()
+    const gainNode = audioContext.createGain()
+
+    oscillator.connect(gainNode)
+    gainNode.connect(audioContext.destination)
+
+    oscillator.frequency.value = 600
+    oscillator.type = 'square'
+
+    gainNode.gain.setValueAtTime(0.15, audioContext.currentTime)
+    gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.08)
+
+    oscillator.start(audioContext.currentTime)
+    oscillator.stop(audioContext.currentTime + 0.08)
+  } catch {
+    // Audio not supported, fail silently
+  }
+}
+
 const checkDailyCompleted = () => {
   const wotdState = loadWordOfDayState()
   dailyCompleted.value = !!(wotdState && wotdState.completed)
@@ -305,6 +338,9 @@ const fillCurrentGuess = (word: string) => {
 
 const handleKeyPress = (key: string) => {
   if (gameOver.value) return
+
+  // Play click sound for UI keyboard buttons
+  playKeySound()
 
   if (key === 'ENTER') {
     submitGuess()
@@ -466,10 +502,13 @@ onMounted(() => {
     const key = event.key.toUpperCase()
 
     if (key === 'ENTER') {
+      playKeySound()
       submitGuess()
     } else if (key === 'BACKSPACE') {
+      playKeySound()
       deleteLetter()
     } else if (/^[A-Z]$/.test(key)) {
+      playKeySound()
       addLetter(key)
     }
   }
