@@ -12,6 +12,11 @@
 
       <v-spacer />
 
+      <v-btn variant="text" to="/leaderboard" class="text-none">
+        <v-icon start>mdi-trophy</v-icon>
+        Leaderboard
+      </v-btn>
+
       <v-menu>
         <template v-slot:activator="{ props }">
           <v-btn icon v-bind="props" aria-label="Menu">
@@ -19,6 +24,15 @@
           </v-btn>
         </template>
         <v-list>
+          <v-list-item to="/game" prepend-icon="mdi-wizard-hat">
+            <v-list-item-title>Wordle</v-list-item-title>
+          </v-list-item>
+          <v-list-item to="/gridseeker" prepend-icon="mdi-treasure-chest">
+            <v-list-item-title>Grid Seeker</v-list-item-title>
+          </v-list-item>
+          <v-list-item to="/leaderboard" prepend-icon="mdi-trophy">
+            <v-list-item-title>Leaderboard</v-list-item-title>
+          </v-list-item>
           <v-list-item to="/about" prepend-icon="mdi-information">
             <v-list-item-title>About</v-list-item-title>
           </v-list-item>

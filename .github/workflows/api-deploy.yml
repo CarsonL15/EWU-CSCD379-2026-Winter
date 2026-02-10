@@ -1,0 +1,46 @@
+name: Build and Deploy API
+
+on:
+  push:
+    branches:
+      - Assignment3
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches:
+      - Assignment3
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    name: Build, Test, and Deploy API
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
+        working-directory: Wordle.Api
+
+      - name: Run tests
+        run: dotnet test --configuration Release --verbosity normal
+        working-directory: Wordle.Api.Tests
+
+      - name: Publish
+        run: dotnet publish --configuration Release --output ./publish
+        working-directory: Wordle.Api
+
+      - name: Deploy to Azure App Service
+        if: github.event_name == 'push'
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: ${{ secrets.AZURE_APP_SERVICE_NAME }}
+          publish-profile: ${{ secrets.AZURE_API_PUBLISH_PROFILE }}
+          package: Wordle.Api/publish
