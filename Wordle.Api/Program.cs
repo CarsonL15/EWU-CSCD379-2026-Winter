@@ -14,7 +14,8 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 if (!string.IsNullOrEmpty(connectionString))
 {
     builder.Services.AddDbContext<AppDbContext>(options =>
-        options.UseSqlServer(connectionString));
+        options.UseSqlServer(connectionString, sqlOptions =>
+            sqlOptions.EnableRetryOnFailure()));
 }
 else
 {
