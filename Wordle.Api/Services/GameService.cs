@@ -22,7 +22,9 @@ public class GameService
 
     public async Task<List<LeaderboardEntry>> GetLeaderboardAsync(int count = 10)
     {
-        var entries = await _db.Games
+        var games = await _db.Games.ToListAsync();
+
+        var entries = games
             .GroupBy(g => g.PlayerName)
             .Select(group => new LeaderboardEntry
             {
@@ -34,7 +36,7 @@ public class GameService
             })
             .OrderByDescending(e => e.HighScore)
             .Take(count)
-            .ToListAsync();
+            .ToList();
 
         return entries;
     }
