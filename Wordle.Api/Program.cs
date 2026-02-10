@@ -43,7 +43,21 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-    if (db.Database.IsRelational())
+    if (db.Database.IsSqlServer())
+    {
+        // Fix broken schema from SQLite-generated migration (one-time)
+        // If Games table exists without identity column, drop and re-migrate
+        db.Database.ExecuteSqlRaw(@"
+            IF EXISTS (SELECT 1 FROM sys.tables WHERE name = 'Games')
+            AND NOT EXISTS (SELECT 1 FROM sys.identity_columns WHERE object_id = OBJECT_ID('Games'))
+            BEGIN
+                DROP TABLE [Games];
+                DELETE FROM [__EFMigrationsHistory];
+            END
+        ");
+        db.Database.Migrate();
+    }
+    else if (db.Database.IsRelational())
     {
         db.Database.Migrate();
     }

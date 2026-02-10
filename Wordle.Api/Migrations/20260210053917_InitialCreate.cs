@@ -15,16 +15,17 @@ namespace Wordle.Api.Migrations
                 name: "Games",
                 columns: table => new
                 {
-                    GameId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    PlayerName = table.Column<string>(type: "TEXT", nullable: false),
-                    TreasuresFound = table.Column<int>(type: "INTEGER", nullable: false),
-                    ScansRemaining = table.Column<int>(type: "INTEGER", nullable: false),
-                    LivesRemaining = table.Column<int>(type: "INTEGER", nullable: false),
-                    Score = table.Column<int>(type: "INTEGER", nullable: false),
-                    Won = table.Column<bool>(type: "INTEGER", nullable: false),
-                    DurationSeconds = table.Column<int>(type: "INTEGER", nullable: false),
-                    PlayedAt = table.Column<DateTime>(type: "TEXT", nullable: false)
+                    GameId = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PlayerName = table.Column<string>(nullable: false),
+                    TreasuresFound = table.Column<int>(nullable: false),
+                    ScansRemaining = table.Column<int>(nullable: false),
+                    LivesRemaining = table.Column<int>(nullable: false),
+                    Score = table.Column<int>(nullable: false),
+                    Won = table.Column<bool>(nullable: false),
+                    DurationSeconds = table.Column<int>(nullable: false),
+                    PlayedAt = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
