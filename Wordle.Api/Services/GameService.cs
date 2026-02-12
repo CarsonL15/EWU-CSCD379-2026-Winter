@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Wordle.Api.Controllers;
 using Wordle.Api.Data;
 using Wordle.Api.Models;
 
@@ -18,6 +19,45 @@ public class GameService
         _db.Games.Add(game);
         await _db.SaveChangesAsync();
         return game;
+    }
+
+    public async Task<NewGameResponse> GenerateNewGameAsync()
+    {
+        var grid = GenerateGrid();
+        var cells = new List<int>();
+        for (int r = 0; r < grid.Rows; r++)
+        {
+            for (int c = 0; c < grid.Cols; c++)
+            {
+                cells.Add((int)grid.Cells[r, c]);
+            }
+        }
+
+        return await Task.FromResult(new NewGameResponse
+        {
+            Rows = grid.Rows,
+            Cols = grid.Cols,
+            TreasureCount = grid.TreasureCount,
+            TrapCount = grid.TrapCount,
+            Grid = cells
+        });
+    }
+
+    public async Task<Game> SaveGameFromRequestAsync(SaveGameRequest request)
+    {
+        var game = new Game
+        {
+            PlayerName = string.IsNullOrWhiteSpace(request.PlayerName) ? "Guest" : request.PlayerName,
+            TreasuresFound = request.TreasuresFound,
+            ScansRemaining = request.ScansRemaining,
+            LivesRemaining = request.LivesRemaining,
+            Score = request.Score,
+            Won = request.Won,
+            DurationSeconds = request.DurationSeconds,
+            PlayedAt = DateTime.UtcNow
+        };
+
+        return await SaveGameAsync(game);
     }
 
     public async Task<List<LeaderboardEntry>> GetLeaderboardAsync(int count = 10)

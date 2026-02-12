@@ -16,47 +16,16 @@ public class GameController : ControllerBase
     }
 
     [HttpGet("new")]
-    public ActionResult<NewGameResponse> NewGame()
+    public async Task<ActionResult<NewGameResponse>> NewGame()
     {
-        var grid = GameService.GenerateGrid();
-        // Serialize the grid as a flat array for the client
-        var cells = new List<int>();
-        for (int r = 0; r < grid.Rows; r++)
-        {
-            for (int c = 0; c < grid.Cols; c++)
-            {
-                cells.Add((int)grid.Cells[r, c]);
-            }
-        }
-
-        return Ok(new NewGameResponse
-        {
-            Rows = grid.Rows,
-            Cols = grid.Cols,
-            TreasureCount = grid.TreasureCount,
-            TrapCount = grid.TrapCount,
-            // Send the grid encoded so the client can do local scans
-            // In a production game you'd keep this server-side
-            Grid = cells
-        });
+        var response = await _gameService.GenerateNewGameAsync();
+        return Ok(response);
     }
 
     [HttpPost("save")]
     public async Task<ActionResult<Game>> SaveGame([FromBody] SaveGameRequest request)
     {
-        var game = new Game
-        {
-            PlayerName = string.IsNullOrWhiteSpace(request.PlayerName) ? "Guest" : request.PlayerName,
-            TreasuresFound = request.TreasuresFound,
-            ScansRemaining = request.ScansRemaining,
-            LivesRemaining = request.LivesRemaining,
-            Score = request.Score,
-            Won = request.Won,
-            DurationSeconds = request.DurationSeconds,
-            PlayedAt = DateTime.UtcNow
-        };
-
-        var saved = await _gameService.SaveGameAsync(game);
+        var saved = await _gameService.SaveGameFromRequestAsync(request);
         return Ok(saved);
     }
 }
