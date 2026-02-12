@@ -55,7 +55,7 @@
     <!-- Game Grid -->
     <v-row justify="center">
       <v-col cols="12" class="d-flex justify-center">
-        <div class="grid-board">
+        <div class="grid-board" :class="{ 'grid-loading': gridLoading }">
           <div
             v-for="row in 8"
             :key="row"
@@ -189,6 +189,7 @@ const gameWon = ref(false)
 const gameMessage = ref('')
 const gameMessageType = ref<'success' | 'error' | 'info' | 'warning'>('info')
 const startTime = ref(Date.now())
+const gridLoading = ref(true)
 
 // Cell tracking
 const revealed = ref<boolean[][]>(Array.from({ length: 8 }, () => Array(8).fill(false)))
@@ -235,6 +236,7 @@ const saveName = () => {
 }
 
 const startNewGame = async () => {
+  gridLoading.value = true
   gameOver.value = false
   gameWon.value = false
   scansRemaining.value = 15
@@ -243,6 +245,7 @@ const startNewGame = async () => {
   score.value = 0
   gameMessage.value = ''
   startTime.value = Date.now()
+  grid.value = []
   revealed.value = Array.from({ length: 8 }, () => Array(8).fill(false))
   cellResults.value = Array.from({ length: 8 }, () => Array(8).fill(''))
   cellDistances.value = Array.from({ length: 8 }, () => Array(8).fill(''))
@@ -257,6 +260,8 @@ const startNewGame = async () => {
     generateLocalGrid()
     gameMessage.value = 'Playing offline (API unavailable)'
     gameMessageType.value = 'warning'
+  } finally {
+    gridLoading.value = false
   }
 }
 
@@ -282,7 +287,7 @@ const getCellType = (row: number, col: number): number => {
 }
 
 const scanCell = (row: number, col: number) => {
-  if (gameOver.value || revealed.value[row][col] || scansRemaining.value <= 0) return
+  if (gridLoading.value || gameOver.value || revealed.value[row][col] || scansRemaining.value <= 0) return
 
   revealed.value[row][col] = true
   scansRemaining.value--
@@ -429,6 +434,11 @@ const getCellClass = (row: number, col: number) => {
   font-weight: bold;
   font-size: 0.85rem;
   user-select: none;
+}
+
+.grid-loading {
+  opacity: 0.5;
+  pointer-events: none;
 }
 
 .cell-hidden {
