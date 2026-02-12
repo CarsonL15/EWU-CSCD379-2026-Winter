@@ -91,6 +91,7 @@
               <div
                 class="tile"
                 :class="getTileClass(rowIndex, colIndex)"
+                :style="getFlipDelay(rowIndex, colIndex)"
               >
                 {{ letter }}
               </div>
@@ -480,6 +481,14 @@ const getTileClass = (rowIndex: number, colIndex: number) => {
   return `tile-${row.results[colIndex]}`
 }
 
+const getFlipDelay = (rowIndex: number, colIndex: number) => {
+  const row = guesses.value[rowIndex]
+  if (row.submitted) {
+    return { animationDelay: `${colIndex * 0.15}s` }
+  }
+  return {}
+}
+
 const getKeyClass = (key: string) => {
   const state = keyStates.value[key]
   if (state) {
@@ -557,18 +566,21 @@ onMounted(() => {
   background: linear-gradient(135deg, #6aaa64 0%, #538d4e 100%);
   border-color: #6aaa64;
   color: white;
+  animation: flip 0.5s ease forwards;
 }
 
 .tile-present {
   background: linear-gradient(135deg, #c9b458 0%, #b59f3b 100%);
   border-color: #c9b458;
   color: white;
+  animation: flip 0.5s ease forwards;
 }
 
 .tile-absent {
   background: linear-gradient(135deg, #787c7e 0%, #3a3a3c 100%);
   border-color: #787c7e;
   color: white;
+  animation: flip 0.5s ease forwards;
 }
 
 .keyboard {
@@ -612,6 +624,12 @@ onMounted(() => {
   0% { transform: scale(1); }
   50% { transform: scale(1.1); }
   100% { transform: scale(1); }
+}
+
+@keyframes flip {
+  0% { transform: scaleY(1); }
+  50% { transform: scaleY(0); }
+  100% { transform: scaleY(1); }
 }
 
 @media (max-width: 400px) {

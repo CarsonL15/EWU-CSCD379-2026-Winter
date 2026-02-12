@@ -25,6 +25,7 @@ else
 
 // Register services via DI
 builder.Services.AddScoped<GameService>();
+builder.Services.AddScoped<TestimonialService>();
 
 // CORS
 builder.Services.AddCors(options =>
