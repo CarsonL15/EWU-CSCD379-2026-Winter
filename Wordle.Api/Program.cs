@@ -46,41 +46,14 @@ using (var scope = app.Services.CreateScope())
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
     if (db.Database.IsSqlServer())
     {
-        // Fix broken schema from SQLite-generated migrations (one-time)
-        // Drop tables with wrong column types and re-migrate
+        // Drop all tables so EnsureCreated rebuilds with correct SQL Server types
+        // (Migrations were generated with SQLite and have wrong column types for SQL Server)
         db.Database.ExecuteSqlRaw(@"
-            -- Drop Games if it has no identity or has TEXT columns (SQLite types)
-            IF EXISTS (SELECT 1 FROM sys.tables WHERE name = 'Games')
-            AND (
-                NOT EXISTS (SELECT 1 FROM sys.identity_columns WHERE object_id = OBJECT_ID('Games'))
-                OR EXISTS (
-                    SELECT 1 FROM sys.columns c
-                    JOIN sys.types t ON c.system_type_id = t.system_type_id
-                    WHERE c.object_id = OBJECT_ID('Games') AND t.name = 'text'
-                )
-            )
-            BEGIN
-                DROP TABLE [Games];
-            END
-
-            -- Drop Testimonials if it has TEXT columns (SQLite types)
-            IF EXISTS (SELECT 1 FROM sys.tables WHERE name = 'Testimonials')
-            AND EXISTS (
-                SELECT 1 FROM sys.columns c
-                JOIN sys.types t ON c.system_type_id = t.system_type_id
-                WHERE c.object_id = OBJECT_ID('Testimonials') AND t.name = 'text'
-            )
-            BEGIN
-                DROP TABLE [Testimonials];
-            END
-
-            -- Clear migration history so all migrations re-run cleanly
-            IF EXISTS (SELECT 1 FROM sys.tables WHERE name = '__EFMigrationsHistory')
-            BEGIN
-                DELETE FROM [__EFMigrationsHistory];
-            END
+            IF OBJECT_ID('Games', 'U') IS NOT NULL DROP TABLE [Games];
+            IF OBJECT_ID('Testimonials', 'U') IS NOT NULL DROP TABLE [Testimonials];
+            IF OBJECT_ID('__EFMigrationsHistory', 'U') IS NOT NULL DROP TABLE [__EFMigrationsHistory];
         ");
-        db.Database.Migrate();
+        db.Database.EnsureCreated();
     }
     else if (db.Database.IsRelational())
     {
