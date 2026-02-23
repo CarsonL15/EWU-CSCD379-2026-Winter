@@ -67,9 +67,9 @@
 </template>
 
 <script setup lang="ts">
-import axios from 'axios'
+definePageMeta({ public: true })
 
-const API_BASE = import.meta.env.VITE_API_URL || 'https://gridseeker-api-clayden-fshtdtbzfcb5crgk.eastus-01.azurewebsites.net'
+const { apiFetch } = useApiFetch()
 
 interface LeaderboardEntry {
   playerName: string
@@ -87,8 +87,7 @@ const fetchLeaderboard = async () => {
   loading.value = true
   error.value = ''
   try {
-    const response = await axios.get(`${API_BASE}/api/leaderboard`)
-    entries.value = response.data
+    entries.value = await apiFetch<LeaderboardEntry[]>('/api/leaderboard')
   } catch {
     error.value = 'Could not load leaderboard. Make sure the API is running.'
   } finally {

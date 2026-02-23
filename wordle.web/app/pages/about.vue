@@ -49,3 +49,7 @@
     </v-row>
   </v-container>
 </template>
+
+<script setup lang="ts">
+definePageMeta({ public: true })
+</script>

@@ -2,6 +2,11 @@
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
+  runtimeConfig: {
+    public: {
+      apiBase: 'https://gridseeker-api-clayden-fshtdtbzfcb5crgk.eastus-01.azurewebsites.net',
+    },
+  },
   app: {
     head: {
       link: [

@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Wordle.Api.Models;
 using Wordle.Api.Services;
@@ -22,6 +23,7 @@ public class TestimonialController : ControllerBase
         return Ok(testimonials);
     }
 
+    [Authorize]
     [HttpPost]
     public async Task<ActionResult<Testimonial>> AddTestimonial([FromBody] Testimonial testimonial)
     {
@@ -32,5 +34,14 @@ public class TestimonialController : ControllerBase
 
         var saved = await _testimonialService.AddTestimonialAsync(testimonial);
         return Ok(saved);
+    }
+
+    [Authorize(Roles = "Admin")]
+    [HttpDelete("{id}")]
+    public async Task<ActionResult> DeleteTestimonial(int id)
+    {
+        var deleted = await _testimonialService.DeleteTestimonialAsync(id);
+        if (!deleted) return NotFound();
+        return Ok();
     }
 }

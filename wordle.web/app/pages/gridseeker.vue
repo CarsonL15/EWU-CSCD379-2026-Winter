@@ -172,9 +172,7 @@
 </template>
 
 <script setup lang="ts">
-import axios from 'axios'
-
-const API_BASE = import.meta.env.VITE_API_URL || 'https://gridseeker-api-clayden-fshtdtbzfcb5crgk.eastus-01.azurewebsites.net'
+const { apiFetch } = useApiFetch()
 
 // Game state
 const grid = ref<number[]>([])
@@ -251,10 +249,10 @@ const startNewGame = async () => {
   cellDistances.value = Array.from({ length: 8 }, () => Array(8).fill(''))
 
   try {
-    const response = await axios.get(`${API_BASE}/api/game/new`)
-    grid.value = response.data.grid
-    totalTreasures.value = response.data.treasureCount
-    totalTraps.value = response.data.trapCount
+    const data = await apiFetch<{ grid: number[]; treasureCount: number; trapCount: number }>('/api/game/new')
+    grid.value = data.grid
+    totalTreasures.value = data.treasureCount
+    totalTraps.value = data.trapCount
   } catch {
     // Fallback: generate grid client-side if API is unavailable
     generateLocalGrid()
@@ -377,14 +375,17 @@ const endGame = async (won: boolean) => {
 
   // Save to API
   try {
-    await axios.post(`${API_BASE}/api/game/save`, {
-      playerName: playerName.value,
-      treasuresFound: treasuresFound.value,
-      scansRemaining: scansRemaining.value,
-      livesRemaining: livesRemaining.value,
-      score: score.value,
-      won: won,
-      durationSeconds: durationSeconds
+    await apiFetch('/api/game/save', {
+      method: 'POST',
+      body: JSON.stringify({
+        playerName: playerName.value,
+        treasuresFound: treasuresFound.value,
+        scansRemaining: scansRemaining.value,
+        livesRemaining: livesRemaining.value,
+        score: score.value,
+        won: won,
+        durationSeconds: durationSeconds
+      })
     })
   } catch {
     // Silently fail if API is down

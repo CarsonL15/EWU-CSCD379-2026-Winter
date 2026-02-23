@@ -46,6 +46,10 @@
   </v-container>
 </template>
 
+<script setup lang="ts">
+definePageMeta({ public: true })
+</script>
+
 <style scoped>
 .game-card {
   transition: transform 0.2s ease, box-shadow 0.2s ease;

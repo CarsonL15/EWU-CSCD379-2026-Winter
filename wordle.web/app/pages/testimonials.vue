@@ -7,8 +7,8 @@
           Testimonials
         </h1>
 
-        <!-- Submit Form -->
-        <v-card class="mb-6" elevation="2">
+        <!-- Submit Form (authenticated only) -->
+        <v-card v-if="isAuthenticated" class="mb-6" elevation="2">
           <v-card-title>Leave a Review</v-card-title>
           <v-card-text>
             <v-text-field
@@ -48,6 +48,10 @@
             </v-btn>
           </v-card-actions>
         </v-card>
+
+        <v-alert v-else type="info" variant="tonal" class="mb-6">
+          <NuxtLink to="/login">Sign in</NuxtLink> to leave a review.
+        </v-alert>
 
         <!-- Error/Success Messages -->
         <v-alert v-if="successMessage" type="success" variant="tonal" class="mb-4" closable @click:close="successMessage = ''">
@@ -102,9 +106,10 @@
 </template>
 
 <script setup lang="ts">
-import axios from 'axios'
+definePageMeta({ public: true })
 
-const API_BASE = import.meta.env.VITE_API_URL || 'https://gridseeker-api-clayden-fshtdtbzfcb5crgk.eastus-01.azurewebsites.net'
+const { isAuthenticated } = useAuth()
+const { apiFetch } = useApiFetch()
 
 interface TestimonialData {
   testimonialId: number
@@ -127,8 +132,7 @@ const newRating = ref(5)
 const fetchTestimonials = async () => {
   loading.value = true
   try {
-    const response = await axios.get(`${API_BASE}/api/testimonial`)
-    testimonials.value = response.data
+    testimonials.value = await apiFetch<TestimonialData[]>('/api/testimonial')
   } catch {
     errorMessage.value = 'Could not load testimonials'
   } finally {
@@ -142,10 +146,13 @@ const submitTestimonial = async () => {
   submitting.value = true
   errorMessage.value = ''
   try {
-    await axios.post(`${API_BASE}/api/testimonial`, {
-      author: newAuthor.value || 'Anonymous',
-      content: newContent.value,
-      rating: newRating.value
+    await apiFetch('/api/testimonial', {
+      method: 'POST',
+      body: JSON.stringify({
+        author: newAuthor.value || 'Anonymous',
+        content: newContent.value,
+        rating: newRating.value
+      })
     })
     successMessage.value = 'Thanks for your review!'
     newAuthor.value = ''

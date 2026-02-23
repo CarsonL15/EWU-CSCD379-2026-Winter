@@ -1,5 +1,8 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Wordle.Api;
 using Wordle.Api.Data;
+using Wordle.Api.Models;
 using Wordle.Api.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,6 +25,17 @@ else
     builder.Services.AddDbContext<AppDbContext>(options =>
         options.UseSqlite("Data Source=gridseeker.db"));
 }
+
+// Identity
+builder.Services.AddIdentityApiEndpoints<User>(options =>
+{
+    options.SignIn.RequireConfirmedAccount = false;
+    options.SignIn.RequireConfirmedEmail = false;
+})
+    .AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<AppDbContext>();
+
+builder.Services.AddAuthorization();
 
 // Register services via DI
 builder.Services.AddScoped<GameService>();
@@ -47,11 +61,11 @@ using (var scope = app.Services.CreateScope())
     if (db.Database.IsSqlServer())
     {
         // Drop all tables so EnsureCreated rebuilds with correct SQL Server types
-        // (Migrations were generated with SQLite and have wrong column types for SQL Server)
         db.Database.ExecuteSqlRaw(@"
-            IF OBJECT_ID('Games', 'U') IS NOT NULL DROP TABLE [Games];
-            IF OBJECT_ID('Testimonials', 'U') IS NOT NULL DROP TABLE [Testimonials];
-            IF OBJECT_ID('__EFMigrationsHistory', 'U') IS NOT NULL DROP TABLE [__EFMigrationsHistory];
+            DECLARE @sql NVARCHAR(MAX) = '';
+            SELECT @sql += 'DROP TABLE [' + TABLE_SCHEMA + '].[' + TABLE_NAME + '];'
+            FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE';
+            EXEC sp_executesql @sql;
         ");
         db.Database.EnsureCreated();
     }
@@ -63,6 +77,8 @@ using (var scope = app.Services.CreateScope())
     {
         db.Database.EnsureCreated();
     }
+
+    await Seeder.SeedData(scope.ServiceProvider);
 }
 
 // Configure the HTTP request pipeline
@@ -72,7 +88,11 @@ app.UseSwaggerUI();
 
 app.UseCors();
 
+app.UseAuthentication();
+app.UseAuthorization();
+
 app.MapControllers();
+app.MapIdentityApi<User>();
 
 app.Run();
 

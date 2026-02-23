@@ -31,4 +31,14 @@ public class TestimonialService
         await _db.SaveChangesAsync();
         return testimonial;
     }
+
+    public async Task<bool> DeleteTestimonialAsync(int id)
+    {
+        var testimonial = await _db.Testimonials.FindAsync(id);
+        if (testimonial is null) return false;
+
+        _db.Testimonials.Remove(testimonial);
+        await _db.SaveChangesAsync();
+        return true;
+    }
 }

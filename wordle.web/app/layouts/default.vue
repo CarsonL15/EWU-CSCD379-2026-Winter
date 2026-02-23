@@ -21,9 +21,20 @@
 
       <v-spacer />
 
+      <span v-if="isAuthenticated" class="text-body-2 mr-2 d-none d-sm-inline">{{ email }}</span>
+
       <v-btn variant="text" to="/leaderboard" class="text-none">
         <v-icon start>mdi-trophy</v-icon>
         Leaderboard
+      </v-btn>
+
+      <v-btn v-if="isAuthenticated" variant="text" class="text-none" @click="handleLogout">
+        <v-icon start>mdi-logout</v-icon>
+        Logout
+      </v-btn>
+      <v-btn v-else variant="text" to="/login" class="text-none">
+        <v-icon start>mdi-login</v-icon>
+        Login
       </v-btn>
 
       <v-menu>
@@ -48,6 +59,9 @@
           <v-list-item to="/about" prepend-icon="mdi-information">
             <v-list-item-title>About</v-list-item-title>
           </v-list-item>
+          <v-list-item v-if="isAdmin" to="/admin" prepend-icon="mdi-shield-crown">
+            <v-list-item-title>Admin</v-list-item-title>
+          </v-list-item>
           <v-list-item @click="showSettings = true" prepend-icon="mdi-cog">
             <v-list-item-title>Settings</v-list-item-title>
           </v-list-item>
@@ -65,4 +79,11 @@
 
 <script setup lang="ts">
 const showSettings = ref(false)
+const { isAuthenticated, isAdmin, email, logout } = useAuth()
+const router = useRouter()
+
+const handleLogout = () => {
+  logout()
+  router.push('/login')
+}
 </script>

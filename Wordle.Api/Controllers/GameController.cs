@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Wordle.Api.Models;
 using Wordle.Api.Services;
@@ -6,6 +7,7 @@ namespace Wordle.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize]
 public class GameController : ControllerBase
 {
     private readonly GameService _gameService;
