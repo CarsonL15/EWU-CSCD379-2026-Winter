@@ -1,3 +1,15 @@
+## Deployment
+
+**Azure URL**: https://icy-wave-03d88090f.4.azurestaticapps.net
+
+## Extra Credit Ideas
+
+1. **Daily Challenge Mode** - A mode where all players get the same word each day, with a leaderboard showing who solved it in the fewest guesses.
+2. **Multiplayer 1v1** - Real time competitive mode where two players race to solve the same word first.
+3. **Custom Word Lists** - Allow users to create and share themed word lists.
+
+---
+
 ## Instructors ##
 [Grant Erickson](https://github.com/GrantErickson), [Meg Gravatt](https://github.com/mmwoodfo), and [Benjamin Michaelis](https://github.com/BenjaminMichaelis)
 

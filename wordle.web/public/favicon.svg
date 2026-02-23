@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="8" fill="#1976D2"/>
+  <!-- Wizard hat -->
+  <polygon points="32,6 14,42 50,42" fill="#FFD54F" stroke="white" stroke-width="1.5"/>
+  <rect x="10" y="42" width="44" height="7" rx="3.5" fill="#FFD54F" stroke="white" stroke-width="1.5"/>
+  <!-- Star -->
+  <polygon points="32,14 34,22 42,22 36,27 38,35 32,30 26,35 28,27 22,22 30,22" fill="white" opacity="0.85"/>
+  <!-- Letter tiles -->
+  <rect x="14" y="52" width="10" height="10" rx="1.5" fill="white" opacity="0.9"/>
+  <rect x="27" y="52" width="10" height="10" rx="1.5" fill="white" opacity="0.9"/>
+  <rect x="40" y="52" width="10" height="10" rx="1.5" fill="white" opacity="0.9"/>
+</svg>
